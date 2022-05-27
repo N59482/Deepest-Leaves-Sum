@@ -17,39 +17,37 @@ using namespace std;
  * };
  */
 
+//Работает иногда но проваливает некоторые тесты
 
-// проблема с подсчётом нынешней глубины int depth_now
 class Solution {
 public:
-    void monkey(TreeNode* root, int & sum, int & max_depth, int depth_now) \\ потому что проходит по дереву.\\ подумать про const 
+    void monkey(TreeNode* root, int & sum, int & max_depth, int depth_now) //назвал monkey потому что фукнция проходит по дереву.
         {
-            while(root)
+            while(root != nullptr)
                 {
-                    if(!root->left && !root->right)\\ если мы на дне.
+                    depth_now++;
+                    if((root->left == nullptr) && (root->right == nullptr))// если мы на дне.
                         {
-                            if(depth_now > max_depth) \\ пробили дно
+                            if(depth_now > max_depth)  // пробили дно
                                 {
-                                    sum = root->val;
-                                    max_depth = depth_now;
-                                };
-                            else if(depth_now = max_depth) \\ нашли дно
+                                    sum = root->val; // обновляем итоговую сумму затирая неактуальные значения.
+                                    max_depth = depth_now; 
+                                }
+                            else if(depth_now == max_depth) // нашли дно
                                 sum += root->val;
                             return; // с дна больше некуда идти.
                         };
                     monkey(root->left, sum, max_depth, depth_now);
-                    monkey(root->right, sum, max_depth, depth_now)
+                    monkey(root->right, sum, max_depth, depth_now);
+                    return;
                 };
-        };     
+        };
 
     int deepestLeavesSum(TreeNode* root) 
     {
-        int max_depth = 1; \\ подумать над начальными значениями
-        int depth_now = 1; \\ подумать над начальными значениями
-        int sum = root->val; \\ подумать над начальными значениями
+        int max_depth = 0; // подумать над начальными значениями
+        int depth_now = 0; // подумать над начальными значениями
+        int sum = root->val; // подумать над начальными значениями
+        monkey(root,sum,max_depth, depth_now);
+        return sum;
     };
-};
-
-int main()
-{
-    return 0;
-}
