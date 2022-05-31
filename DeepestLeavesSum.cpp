@@ -1,8 +1,3 @@
-#include <iostream>
-#include <cstdlib>
-
-using namespace std;
-
 /**
  * Given the root of a binary tree, return the sum of values of its deepest leaves.
  * 
@@ -16,8 +11,6 @@ using namespace std;
  *     TreeNode(int x, TreeNode *left, TreeNode *right) : val(x), left(left), right(right) {}
  * };
  */
-
-//Работает иногда но проваливает некоторые тесты
 
 class Solution {
 public:
@@ -51,3 +44,4 @@ public:
         monkey(root,sum,max_depth, depth_now);
         return sum;
     };
+};
